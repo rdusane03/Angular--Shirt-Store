@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h4 class="modal-title">My Cart</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body" *ngIf="products.length != 0">
+    <div class="container col-md-12" *ngFor="let item of products">
+        <div class="row">
+            <div class="col-md-4">
+                <img style="float: left; margin-right: 30px;" [src]="item.picture" alt="item.name">
+            </div>
+            <div class="col-md-5">
+                <p><strong>Name: </strong>{{ item.name }}</p>
+                <p><strong>Price: </strong>{{ item.price }}</p>
+                <strong>Quantity:</strong>
+                <input type="text" #quantitySelect [ngModel]="item.qty"
+                    (ngModelChange)="changeQuantity(item, quantitySelect.value)" size="4" />
+            </div>
+            <div class="col-md-3"><button (click)="removeItem(item)" class="btn btn-danger"><i
+                        class="fas fa-trash-alt"></i></button></div>
+            <div>
+            </div>
+        </div>
+        <br>
+    </div>
+    <div class="col-lg-6"></div>
+    <div class="col-lg-6"><strong>Total Price:</strong>${{grandTotal}}</div>
+</div>
+<div class="modal-body" *ngIf="products.length == 0">
+    <p><strong>No Items in the cart</strong></p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>
